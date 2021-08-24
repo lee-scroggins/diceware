@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/passphrases")
 public class PersistentPassphraseController {
-
   private final PassphraseGenerator generator;
   private final PassphraseRepository repository;
 
@@ -34,7 +33,6 @@ public class PersistentPassphraseController {
 
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-
   public Passphrase post(@RequestBody Passphrase passphrase) {
     // TODO Support specification of full passphrase (not just length) from client.
     passphrase.getWords().clear(); // FIXME Respect the words provided by the client.
@@ -52,7 +50,6 @@ public class PersistentPassphraseController {
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-
   public Passphrase get(@PathVariable UUID id) {
     return repository
         .findById(id)
@@ -61,7 +58,6 @@ public class PersistentPassphraseController {
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-
   public void delete(@PathVariable UUID id) {
     repository
         .findById(id)
@@ -72,7 +68,6 @@ public class PersistentPassphraseController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-
   public Iterable<Passphrase> get() {
     return repository.getAllByOrderByCreatedDesc();
   }
